@@ -1,30 +1,31 @@
-CREATE DATABASE e_commerce_db;
+
 
 CREATE TABLE user (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    password_hash VARCHAR(255) NOT NULL
+    user_id INT PRIMARY KEY,
+    firstname TEXT,
+    lastname TEXT,
+    username VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE address (
-    address_id INT AUTO_INCREMENT PRIMARY KEY,
+    address_id INT PRIMARY KEY,
     user_id INT,
-    street_address VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    postal_code VARCHAR(10) NOT NULL,
+    street_address TEXT,
+    city TEXT,
+    postal_code TEXT,
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
 CREATE TABLE product (
-    product_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    product_id INT PRIMARY KEY,
+    name TEXT,
     description TEXT,
     price DECIMAL(10, 2) NOT NULL,
     stock_available INT NOT NULL
 );
 
 CREATE TABLE cart (
-    cart_id INT AUTO_INCREMENT PRIMARY KEY,
+    cart_id INT PRIMARY KEY,
     user_id INT,
     product_id INT,
     quantity INT NOT NULL,
@@ -34,7 +35,7 @@ CREATE TABLE cart (
 
 
 CREATE TABLE command (
-    command_id INT AUTO_INCREMENT PRIMARY KEY,
+    command_id INT PRIMARY KEY,
     user_id INT,
     product_id INT,
     quantity INT NOT NULL,
@@ -43,11 +44,11 @@ CREATE TABLE command (
 );
 
 CREATE TABLE invoices (
-    invoice_id INT AUTO_INCREMENT PRIMARY KEY,
+    invoice_id INT PRIMARY KEY,
     user_id INT,
     product_id INT,
     quantity INT NOT NULL,
-    order_date DATE,
+    order_date DATETIME,
     FOREIGN KEY (user_id) REFERENCES user(user_id),
     FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
